@@ -8,7 +8,6 @@ ENV OPENCLAW_CONFIG_PATH=/data/.openclaw/openclaw.json
 
 EXPOSE 8080
 
-COPY railway-start.sh /usr/local/bin/openclaw-railway-start
-RUN chmod +x /usr/local/bin/openclaw-railway-start
+COPY railway-start.sh /tmp/openclaw-railway-start.sh
 
-CMD ["openclaw-railway-start"]
+CMD ["sh", "/tmp/openclaw-railway-start.sh"]
