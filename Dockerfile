@@ -1,26 +1,11 @@
-FROM node:24-bookworm
+FROM ghcr.io/openclaw/openclaw:latest
 
-WORKDIR /app
+ENV NODE_ENV=production
+ENV OPENCLAW_HOME=/data
+ENV OPENCLAW_STATE_DIR=/data/.openclaw
+ENV OPENCLAW_WORKSPACE_DIR=/data/workspace
+ENV OPENCLAW_CONFIG_PATH=/data/.openclaw/openclaw.json
 
-RUN apt-get update && apt-get install -y 
-git 
-curl 
-python3 
-build-essential 
-ca-certificates 
-openssl
+EXPOSE 8080
 
-RUN npm install -g pnpm
-
-COPY . .
-
-RUN NODE_OPTIONS=--max-old-space-size=2048 pnpm install --frozen-lockfile
-
-RUN pnpm build:docker || true
-RUN pnpm ui:build || true
-RUN pnpm qa:lab:build || true
-
-EXPOSE 18789
-
-CMD ["node", "openclaw.mjs", "gateway", "--bind", "0.0.0.0"]
-# railway rebuild
+CMD ["sh", "-c", "mkdir -p \"$OPENCLAW_STATE_DIR\" \"$OPENCLAW_WORKSPACE_DIR\" && openclaw gateway --bind lan --port ${PORT:-8080} --allow-unconfigured"]
