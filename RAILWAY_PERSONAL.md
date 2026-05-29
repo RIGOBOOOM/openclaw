@@ -18,6 +18,7 @@ OPENCLAW_STATE_DIR=/data/.openclaw
 OPENCLAW_WORKSPACE_DIR=/data/workspace
 OPENCLAW_CONFIG_PATH=/data/.openclaw/openclaw.json
 ANTHROPIC_API_KEY=sk-ant-...
+OPENCLAW_PRIMARY_MODEL=anthropic/claude-sonnet-4-5
 ```
 
 5. Abrir:
@@ -28,4 +29,6 @@ https://TU-DOMINIO.up.railway.app/setup
 
 ## Por que esta rama
 
-El Dockerfile oficial compila OpenClaw desde fuente y puede fallar en Railway por BuildKit, memoria, pnpm, Bun o dependencias nativas. Esta rama usa la imagen preconstruida `ghcr.io/openclaw/openclaw:latest` y solo arranca el gateway con `--bind lan`, que es lo que Railway necesita.
+El Dockerfile oficial compila OpenClaw desde fuente y puede fallar en Railway por BuildKit, memoria, pnpm, Bun o dependencias nativas. Esta rama usa la imagen preconstruida `ghcr.io/openclaw/openclaw:latest` y arranca el gateway con `--bind lan`, que es lo que Railway necesita.
+
+Si no existe `/data/.openclaw/openclaw.json`, el contenedor lo crea automaticamente con gateway, token, workspace y Claude.
