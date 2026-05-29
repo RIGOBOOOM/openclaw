@@ -1,5 +1,7 @@
 FROM ghcr.io/openclaw/openclaw:latest
 
+USER root
+
 ENV NODE_ENV=production
 ENV OPENCLAW_HOME=/data
 ENV OPENCLAW_STATE_DIR=/data/.openclaw
