@@ -8,4 +8,7 @@ ENV OPENCLAW_CONFIG_PATH=/data/.openclaw/openclaw.json
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "mkdir -p \"$OPENCLAW_STATE_DIR\" \"$OPENCLAW_WORKSPACE_DIR\" && openclaw gateway --bind lan --port ${PORT:-8080} --allow-unconfigured"]
+COPY railway-start.sh /usr/local/bin/openclaw-railway-start
+RUN chmod +x /usr/local/bin/openclaw-railway-start
+
+CMD ["openclaw-railway-start"]
