@@ -23,3 +23,4 @@ RUN pnpm qa:lab:build || true
 EXPOSE 18789
 
 CMD ["node", "openclaw.mjs", "gateway", "--bind", "0.0.0.0"]
+# railway rebuild
