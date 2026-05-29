@@ -50,6 +50,7 @@ config.gateway = {
   controlUi: {
     ...((config.gateway || {}).controlUi || {}),
     allowInsecureAuth: true,
+    dangerouslyDisableDeviceAuth: true,
     allowedOrigins: [...new Set([
       ...(((config.gateway || {}).controlUi || {}).allowedOrigins || []),
       ...allowedOrigins,
